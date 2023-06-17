@@ -1,15 +1,4 @@
-#include <iostream>
-#include <locale>
-#include <vector>
-#include <cstdlib>
-#include <fstream>
-
-using namespace std;
-
-#include "Produto.cpp"
-#include "ProdutoPorPeso.cpp"
-#include "ProdutoPorUnidade.cpp"
-#include "Estoque.cpp"
+#include "Restaurante.h"
 
 int main()
 {
@@ -18,8 +7,8 @@ int main()
 
     Estoque estoque;
 
-    while (true) {
-
+    while (true) 
+    {
         cout << "-------------MENU DA LANCHONETE-------------" << endl;
         cout << "            ||________________||            " << endl;
         cout << "           |    ____________    |           " << endl;
@@ -38,10 +27,11 @@ int main()
         cin >> escolha;
         cout << endl;
 
-        if (escolha == "1") {
-
+        if (escolha == "1") 
+        {
             string escolhaAtendimento;
-            while (true) {
+            while (true) 
+            {
 
                 cout << "-------MENU DO ATENDIMENTO AO CLIENTE-------" << endl;
                 cout << " DIGITE 1 - PARA ADICIONAR AO CARRINHO       " << endl;
@@ -53,27 +43,36 @@ int main()
                 cin >> escolhaAtendimento;
                 cout << endl;
 
-                if (escolhaAtendimento == "1") {
+                if (escolhaAtendimento == "1") 
+                {
                     //DIGITE 1 - PARA ADICIONAR AO CARRINHO
                     cout << "o" << endl;
                 }
-                else if (escolhaAtendimento == "2") {
+                else if (escolhaAtendimento == "2") 
+                {
                     //DIGITE 2 - PARA REMOVER DO CARRINHO
                     cout << "o" << endl;
                 }
-                else if (escolhaAtendimento == "3") {
+                else if (escolhaAtendimento == "3") 
+                {
                     //DIGITE 3 - PARA FINALIZAR PEDIDO
                     cout << "o" << endl;
                 }
-                else if (escolhaAtendimento == "VOLTAR") {
+                else if (escolhaAtendimento == "VOLTAR") 
+                {
                     break;
+                }
+                else
+                {
+                    cout << "\aERROR - ESCOLHA INVALIDA - ERROR" << endl;
                 }
             }
         }
-        else if (escolha == "2") {
-
+        else if (escolha == "2") 
+        {
             string escolhaEstoque;
-            while (true) {
+            while (true) 
+            {
 
                 cout << "------MENU DO GERENCIAMENTO DE ESTOQUE------" << endl;
                 cout << " DIGITE 1 - PARA IMPRIMIR TODO O ESTOQUE    " << endl;
@@ -87,47 +86,68 @@ int main()
                 cout << endl;
 
 
-                if (escolhaEstoque == "1") {
+                if (escolhaEstoque == "1") 
+                {
                     // DIGITE 1 - PARA IMPRIMIR TODO O ESTOQUE
                     estoque.imprimirEstoque(0, true);
                 }
-                else if (escolhaEstoque == "2") {
+                else if (escolhaEstoque == "2") 
+                {
                     // DIGITE 2 - PARA PROCURAR PRODUTOS
-                    int escolhaTipoProduto;
+                    string escolhaTipoProduto;
                     cout << "Escolha o tipo de produto: " << endl;
                     cout << " 1 - Produto por unidade" << endl;
                     cout << " 2 - Produto por peso" << endl;
                     cin >> escolhaTipoProduto;
 
-                    if (escolhaTipoProduto == 1) {
-                        int indiceProduto;
+                    if (escolhaTipoProduto == "1") {
+                        string indiceProdutoString;
                         cout << "Digite o índice do produto por unidade: ";
-                        cin >> indiceProduto;
-                        estoque.recuperarDadosDoProduto(1, indiceProduto - 1, true);
+                        cin.ignore();
+                        getline(cin, indiceProdutoString);
+                        
+                        try {
+                            int indiceProduto = stoi(indiceProdutoString);
+                            estoque.recuperarDadosDoProduto(1, indiceProduto - 1, true);
+                        }
+                        catch (invalid_argument& e) {
+                            cout << "\aERROR - ENTRADA INVALIDA - ERROR" << endl;
+                        }
                     }
-                    else if (escolhaTipoProduto == 2) {
-                        int indiceProduto;
+                    else if (escolhaTipoProduto == "2") {
+                        string indiceProdutoString;
                         cout << "Digite o índice do produto por peso: ";
-                        cin >> indiceProduto;
-                        estoque.recuperarDadosDoProduto(2, indiceProduto - 1, true);
+                        cin.ignore();
+                        getline(cin, indiceProdutoString);
+
+                        try {
+                            int indiceProduto = stoi(indiceProdutoString);
+                            estoque.recuperarDadosDoProduto(2, indiceProduto - 1, true);
+                        }
+                        catch (invalid_argument& e) {
+                            cout << "\aERROR - ENTRADA INVALIDA - ERROR" << endl;
+                        }
                     }
-                    else {
-                        cout << "Escolha inválida." << endl;
+                    else 
+                    {
+                        cout << "\aERROR - ESCOLHA INVALIDA - ERROR" << endl;
                     }
                 }
-                else if (escolhaEstoque == "3") {
+                else if (escolhaEstoque == "3") 
+                {
                     // DIGITE 3 - PARA ADICIONAR PRODUTOS
-                    int escolhaTipoProduto;
+                    string escolhaTipoProduto;
                     cout << "Escolha o tipo de produto: " << endl;
                     cout << " 1 - Produto por unidade" << endl;
                     cout << " 2 - Produto por peso" << endl;
                     cin >> escolhaTipoProduto;
 
-                    if (escolhaTipoProduto == 1) {
+                    if (escolhaTipoProduto == "1") 
+                    {
                         string nomeProduto;
-                        int codigoProduto;
-                        float precoProduto;
-                        int quantidade;
+                        string codigoProduto;
+                        string precoProduto;
+                        string quantidade;
 
                         cout << "Digite o nome do produto por unidade: ";
                         cin.ignore();
@@ -145,9 +165,12 @@ int main()
                         estoque.adicionarProdutoUnidade(ProdutoPorUnidade(quantidade, nomeProduto, codigoProduto, precoProduto));
                         cout << "Produto por unidade adicionado com sucesso ao estoque." << endl;
                     }
-                    else if (escolhaTipoProduto == 2) {
+                    else if (escolhaTipoProduto == "2") 
+                    {
                         string nomeProduto;
-                        double peso;
+                        string peso;
+                        string codigo;
+                        string preco;
 
                         cout << "Digite o nome do produto por peso: ";
                         cin.ignore();
@@ -155,49 +178,70 @@ int main()
 
                         cout << "Digite o peso do produto: ";
                         cin >> peso;
-                        estoque.adicionarProdutoPeso(ProdutoPorPeso(peso, nomeProduto, 2, 14.90));
+
+                        cout << "Digite o codigo do produto: ";
+                        cin >> codigo;
+
+                        cout << "Digite o preco do produto: ";
+                        cin >> preco;
+
+                        estoque.adicionarProdutoPeso(ProdutoPorPeso(peso, nomeProduto, codigo, preco));
                         cout << "Produto por peso adicionado com sucesso ao estoque." << endl;
                     }
-                    else {
-                        cout << "Escolha inválida." << endl;
+                    else 
+                    {
+                        cout << "\aERROR - ESCOLHA INVALIDA - ERROR" << endl;
                     }
                 }
 
-                else if (escolhaEstoque == "4") {
+                else if (escolhaEstoque == "4") 
+                {
                     // DIGITE 4 - REMOVER PRODUTOS
-                    int escolhaTipoProduto;
+                    string escolhaTipoProduto;
                     cout << "Escolha o tipo de produto: " << endl;
                     cout << " 1 - Produto por unidade" << endl;
                     cout << " 2 - Produto por peso" << endl;
                     cin >> escolhaTipoProduto;
 
-                    if (escolhaTipoProduto == 1) {
+                    if (escolhaTipoProduto == "1") 
+                    {
                         estoque.removerProdutoUnidade();
                         cout << "Produto por unidade removido do estoque." << endl;
                     }
-                    else if (escolhaTipoProduto == 2) {
+                    else if (escolhaTipoProduto == "2")
+                    {
                         estoque.removerProdutoPeso();
                         cout << "Produto por peso removido do estoque." << endl;
                     }
-                    else {
-                        cout << "Escolha inválida." << endl;
+                    else 
+                    {
+                        cout << "\aERROR - ESCOLHA INVALIDA - ERROR" << endl;
                     }
                 }
-                else if (escolhaEstoque == "VOLTAR") {
+                else if (escolhaEstoque == "VOLTAR") 
+                {
                     break;
                 }
-                else {
-                    cout << "Escolha inválida." << endl;
+                else 
+                {
+                    cout << "\aERROR - ESCOLHA INVALIDA - ERROR" << endl;
                 }
                 cout << endl;
             }
         }
-        else if (escolha == "3") {
+        else if (escolha == "3") 
+        {
             //DIGITE 3 - PARA MOSTRAR DADOS DA LANCHONETE
             cout << "o" << endl;
         }
-        else if (escolha == "SAIR") {
+        else if (escolha == "SAIR") 
+        {
             break;
+        }
+        else
+        {
+            cout << "\aERROR - ESCOLHA INVALIDA - ERROR" << endl;
         }
     }
 }
+

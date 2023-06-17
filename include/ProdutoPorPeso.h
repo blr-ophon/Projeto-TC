@@ -1,6 +1,8 @@
 #ifndef PRODUTOPORPESO_H
 #define PRODUTOPORPESO_H
 
+#include "Produto.h"
+
 class ProdutoPorPeso : public Produto 
 {
 private:

@@ -1,16 +1,19 @@
 #include "Lanchonete.h"
+#include <iostream>
 
 Lanchonete::Lanchonete() {
 }
 
-void Lanchonete::realizarPedido(Pedido*ponteiro) {
-    this -> historicoPedidos.push_back(&ponteiro);
+/*
+void Lanchonete::realizarPedido(Pedido *ponteiro) {
+    this->historicoPedidos.push_back(ponteiro);
 }
+*/
 
 void Lanchonete::removerPedido(int entrada) {
      vector<Pedido>::iterator it;
     it = historicoPedidos.begin() + entrada - 1;
-    historicoPedidos.erase(it)
+    historicoPedidos.erase(it);
 }
 
 void Lanchonete::setNomeLanchonete(string nome) {

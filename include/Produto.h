@@ -1,5 +1,10 @@
 #ifndef PRODUTO_H
 #define PRODUTO_H
+
+#include <string>
+
+using namespace std;
+
 class Produto 
 {
 protected:

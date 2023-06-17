@@ -38,11 +38,11 @@ int Pedido::getCodigo(){
 
 float Pedido::getValorTotal(){
     float total = 0;
-    for(int i = 0; i<produtosUnidades.size(); i++){
-        total = total + produtosUnidades[i].getPreco();
+    for(int i = 0; i < produtosUnidades.size(); i++){
+        total += stof(produtosUnidades[i].getPreco());
     };
-    for(int i = 0; i<produtosPesos.size(); i++){
-        total = total + produtosPesos[i].getPreco();
+    for(int i = 0; i < produtosPesos.size(); i++){
+        total += stof(produtosPesos[i].getPreco());
     };
     this->valorTotal = total;
     return valorTotal;

@@ -1,5 +1,10 @@
 #include "Estoque.h"
 
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
 Estoque::Estoque() //abre o arquivo EstoqueProdutoUnidade e EstoqueProdutoPeso
 {
     ifstream arquivoUnidade("EstoqueProdutoUnidade.txt");

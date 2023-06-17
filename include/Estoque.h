@@ -1,6 +1,11 @@
 #ifndef ESTOQUE_H
 #define ESTOQUE_H
 
+#include <vector>
+
+#include "ProdutoPorPeso.h"
+#include "ProdutoPorUnidade.h"
+
 class Estoque {
 private:
     vector<ProdutoPorUnidade> produtosUnidade;
