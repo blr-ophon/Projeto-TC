@@ -1,5 +1,6 @@
 #include "Restaurante.h"
 
+/*
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
@@ -205,12 +206,16 @@ int main()
 
                     if (escolhaTipoProduto == "1") 
                     {
-                        estoque.removerProdutoUnidade();
+                        string nomeProduto;
+                        getline(cin, nomeProduto); 
+                        estoque.removerProdutoUnidade(nomeProduto);
                         cout << "Produto por unidade removido do estoque." << endl;
                     }
                     else if (escolhaTipoProduto == "2")
                     {
-                        estoque.removerProdutoPeso();
+                        string nomeProduto;
+                        getline(cin, nomeProduto); 
+                        estoque.removerProdutoPeso(nomeProduto);
                         cout << "Produto por peso removido do estoque." << endl;
                     }
                     else 
@@ -244,4 +249,4 @@ int main()
         }
     }
 }
-
+*/

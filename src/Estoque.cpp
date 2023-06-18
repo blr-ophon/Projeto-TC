@@ -116,85 +116,28 @@ void Estoque::adicionarProdutoUnidade(ProdutoPorUnidade ProdutoP) {
     this->produtosUnidade.push_back(ProdutoP);
 }
 
-void Estoque::removerProdutoUnidade() {
+void Estoque::removerProdutoUnidade(string key) {
     /*
      * Remove produto (por unidade) da memoria.
      */
-    bool sair = false;
-    int entrada;
-    if (produtosUnidade.size() == 0) {
-        cout << "Sem Produtos no estoque" << endl;
-        system("pause");
-    }
-    else {
-        try {
-            //que porra... ???
-            do {
-                cout << "Selecione um produto (1-" << produtosUnidade.size() << ")" << endl;
-                cin >> entrada;
-
-                if (cin.fail()) {
-                    cout << "\aERROR - ENTRADA INVALIDA - ERROR" << endl;
-                    cin.clear();
-                    cin.ignore();
-                }
-                else if (entrada > 0 && entrada <= produtosUnidade.size()) {
-                    sair = true;
-                }
-                else {
-                    cout << "\aERROR - ENTRADA INVALIDA - ERROR" << endl;
-                    system("pause");
-                    system("cls");
-                }
-            } while (!sair);
-            vector<ProdutoPorUnidade>::iterator it;
-            it = produtosUnidade.begin() + entrada - 1;
-            produtosUnidade.erase(it);
-        }
-        catch (const exception& ligador) {
-            cout << "" << ligador.what() << endl;
+    for(int i = 0; i < (int) produtosUnidade.size(); i++){  
+        string nome = produtosUnidade[i].getNome();
+        if(nome == key){
+            produtosUnidade.erase(produtosUnidade.begin() + i);
+            break;
         }
     }
 }
 
-void Estoque::removerProdutoPeso() {
+void Estoque::removerProdutoPeso(string key) {
     /*
      * Remove produto (por Peso) da memoria.
-     * TODO: Refazer
      */
-    bool sair = false;
-    int entrada;
-    if (produtosPeso.size() == 0) {
-        cout << "Sem Produtos no estoque" << endl;
-        system("pause");
-    }
-    else {
-        try {
-            // Por que ;-;
-            do {
-                cout << "Selecione um produto (1-" << produtosPeso.size() << ")" << endl;
-                cin >> entrada;
-
-                if (cin.fail()) {
-                    cout << "\aERROR - ENTRADA INVALIDA - ERROR" << endl;
-                    cin.clear();
-                    cin.ignore();
-                }
-                else if (entrada > 0 && entrada <= produtosPeso.size()) {
-                    sair = true;
-                }
-                else {
-                    cout << "\aERROR - ENTRADA INVALIDA - ERROR" << endl;
-                    system("pause");
-                    system("cls");
-                }
-            } while (!sair);
-            vector<ProdutoPorPeso>::iterator it;
-            it = produtosPeso.begin() + entrada - 1;
-            produtosPeso.erase(it);
-        }
-        catch (const exception& ligador) {
-            cout << "" << ligador.what() << endl;
+    for(int i = 0; i < (int) produtosPeso.size(); i++){  
+        string nome = produtosPeso[i].getNome();
+        if(nome == key){
+            produtosPeso.erase(produtosPeso.begin() + i);
+            break;
         }
     }
 }

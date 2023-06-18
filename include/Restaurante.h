@@ -14,4 +14,10 @@ using namespace std;
 #include "ProdutoPorUnidade.h"
 #include "Estoque.h"
 
+
+void mainMenu(Estoque &estoque);
+void estManageMenu(Estoque &estoque);
+void insertProdutoMenu(Estoque &estoque);
+void SearchProdutoMenu(Estoque &estoque);
+
 #endif
