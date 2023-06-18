@@ -13,8 +13,8 @@ protected:
     string preco;
 
     //lembrar de verificar sua utilidade
-    string regraManipulacao;
-    string regraTransporte;
+    //string regraManipulacao;
+    //string regraTransporte;
 public:
     Produto(string, string, string);
     string getNome();
@@ -25,10 +25,7 @@ public:
     void setNome(string);
     void setCodigo(int codigo);
     void setPreco(float preco);
-    void setRegraManipulacao(string regra);
-    void setRegraTransporte(string regra);
-    string getRegraManipulacao();
-    string getRegraTransporte();
+
     ~Produto();
 };
 
