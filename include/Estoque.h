@@ -7,25 +7,24 @@
 #include "ProdutoPorUnidade.h"
 
 class Estoque {
-private:
-    vector<ProdutoPorUnidade> produtosUnidade;
-    vector<ProdutoPorPeso> produtosPeso;
+    public:
+        Estoque(); 
+                   
+        void adicionarProdutoPeso(ProdutoPorPeso);
+        void removerProdutoPeso();
+        void adicionarProdutoUnidade(ProdutoPorUnidade);
+        void removerProdutoUnidade();
 
-public:
-    Estoque(); 
-               
-    void adicionarProdutoPeso(ProdutoPorPeso);
-    void removerProdutoPeso();
-    void adicionarProdutoUnidade(ProdutoPorUnidade);
-    void removerProdutoUnidade();
+        ProdutoPorPeso getpeso(int);            
+        ProdutoPorUnidade getunidade(int);
+        void imprimirEstoque(int = 0, bool = true);
+        void recuperarDadosDoProduto(int, int, bool);
+        int getSize(int);
 
-    ProdutoPorPeso getpeso(int);            
-    ProdutoPorUnidade getunidade(int);
-    void imprimirEstoque(int = 0, bool = true);
-    void recuperarDadosDoProduto(int, int, bool);
-    int getSize(int);
-
-    ~Estoque(); 
+        ~Estoque(); 
+    private:
+        vector<ProdutoPorUnidade> produtosUnidade;
+        vector<ProdutoPorPeso> produtosPeso;
 };
 
 #endif

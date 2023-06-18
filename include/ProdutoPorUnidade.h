@@ -11,11 +11,9 @@ private:
 
 public:
     ProdutoPorUnidade(string, string, string, string);
-    string getQuantidade();
-
-    //lembrar de verificar sua utilidade
-    void setQuantidade(int quantidade);
     ~ProdutoPorUnidade();
+    string getQuantidade();
+    void setQuantidade(string);
 };
 
 

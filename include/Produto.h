@@ -23,8 +23,8 @@ public:
 
     //lembrar de verificar sua utilidade
     void setNome(string);
-    void setCodigo(int codigo);
-    void setPreco(float preco);
+    void setCodigo(string);
+    void setPreco(string);
 
     ~Produto();
 };

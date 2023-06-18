@@ -23,6 +23,7 @@ ${BUILD_DIR}/%.o: ${SRC_DIR}/%.cpp
 clean:
 	rm -rf ${BUILD_DIR} 
 	rm -rf ${BIN_DIR} 
+	rm *.txt
 
 run: ${EXEC}
 	$^ 

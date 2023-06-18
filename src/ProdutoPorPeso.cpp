@@ -12,9 +12,9 @@ string ProdutoPorPeso::getPeso()
 }
 
 //lembrar de verificar sua utilidade
-void ProdutoPorPeso::setPeso(double peso) 
+void ProdutoPorPeso::setPeso(string str) 
 {
-    this->peso = peso;
+    peso = str;
 }
 
 ProdutoPorPeso::~ProdutoPorPeso() {}

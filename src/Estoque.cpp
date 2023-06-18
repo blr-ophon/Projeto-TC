@@ -6,42 +6,67 @@
 //TODO: usar enum para os 'estoques', com um ANY ao invés de all
 //TODO: testar os dois removerProduto
 //TODO: testar salvamento e recuperacao de dados em memoria externa.
+//TODO: Fix produtoporunidade constructor
 
 using namespace std;
 
 Estoque::Estoque() {
     /*
-     * Abre o banco e carrega em memoria
+     * Abre os bancos e carrega em memoria
      */
-    ifstream arquivoUnidade("EstoqueProdutoUnidade.txt");
+    ifstream arquivoUnidade("BancoUnidades.txt");
     if (arquivoUnidade.is_open())
     {
-        string quantidade, nome, codigo, preco;
-        while (getline(arquivoUnidade, quantidade))
-        {
-            getline(arquivoUnidade, nome);
-            getline(arquivoUnidade, codigo);
-            getline(arquivoUnidade, preco);
-            ProdutoPorUnidade produtoUnidade(quantidade, nome, codigo, preco);
-            produtosUnidade.push_back(produtoUnidade);
+        string curLine; 
+        ProdutoPorUnidade tmp("", "", "", "");  
+        for(int i = 0; getline(arquivoUnidade, curLine); i++){
+            switch(i % 4){
+                case 0:
+                    tmp.setNome(curLine);
+                    break;
+                case 1:
+                    tmp.setCodigo(curLine);
+                    break;
+                case 2:
+                    tmp.setPreco(curLine);
+                    break;
+                case 3:
+                    tmp.setQuantidade(curLine);
+                    produtosUnidade.push_back(tmp);
+                    break;
+                default:
+                    break;
+            }
         }
         arquivoUnidade.close();
     }
 
 
-    ifstream arquivoPeso("EstoqueProdutoPeso.txt");
+    ifstream arquivoPeso("BancoPeso.txt");
     if (arquivoPeso.is_open())
     {
-        string peso, nome, codigo, preco;
-        while (getline(arquivoPeso, peso))
-        {
-            getline(arquivoPeso, nome);
-            getline(arquivoPeso, codigo);
-            getline(arquivoPeso, preco);
-            ProdutoPorPeso produtoPeso(peso, nome, codigo, preco);
-            produtosPeso.push_back(produtoPeso);
+        string curLine; 
+        ProdutoPorPeso tmp("", "", "", "");  
+        for(int i = 0; getline(arquivoPeso, curLine); i++){
+            switch(i % 4){
+                case 0:
+                    tmp.setNome(curLine);
+                    break;
+                case 1:
+                    tmp.setCodigo(curLine);
+                    break;
+                case 2:
+                    tmp.setPreco(curLine);
+                    break;
+                case 3:
+                    tmp.setPeso(curLine);
+                    produtosPeso.push_back(tmp);
+                    break;
+                default:
+                    break;
+            }
         }
-        arquivoPeso.close();
+        arquivoUnidade.close();
     }
 }
 
@@ -50,28 +75,28 @@ Estoque::~Estoque() {
     /*
      * Salva os arquivos da memoria para o banco
      */
-    ofstream arquivoUnidade("EstoqueProdutoUnidade.txt");
+    ofstream arquivoUnidade("BancoUnidades.txt");
     if (arquivoUnidade.is_open())
     {
         for (int i = 0; i < (int) produtosUnidade.size(); i++)
         {
-            arquivoUnidade << produtosUnidade[i].getQuantidade() << endl;
             arquivoUnidade << produtosUnidade[i].getNome() << endl;
             arquivoUnidade << produtosUnidade[i].getCodigo() << endl;
             arquivoUnidade << produtosUnidade[i].getPreco() << endl;
+            arquivoUnidade << produtosUnidade[i].getQuantidade() << endl;
         }
         arquivoUnidade.close();
     }
 
-    ofstream arquivoPeso("EstoqueProdutoPeso.txt");
+    ofstream arquivoPeso("BancoPeso.txt");
     if (arquivoPeso.is_open())
     {
         for (int i = 0; i < (int) produtosPeso.size(); i++)
         {
-            arquivoPeso << produtosPeso[i].getPeso() << endl;
             arquivoPeso << produtosPeso[i].getNome() << endl;
             arquivoPeso << produtosPeso[i].getCodigo() << endl;
             arquivoPeso << produtosPeso[i].getPreco() << endl;
+            arquivoPeso << produtosPeso[i].getPeso() << endl;
         }
         arquivoPeso.close();
     }

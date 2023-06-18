@@ -12,9 +12,9 @@ string ProdutoPorUnidade::getQuantidade()
 }
 
 //lembrar de verificar sua utilidade
-void ProdutoPorUnidade::setQuantidade(int quantidade) 
+void ProdutoPorUnidade::setQuantidade(string str) 
 {
-    this->quantidade = quantidade;
+    quantidade = str;
 }
 
 ProdutoPorUnidade::~ProdutoPorUnidade() {}

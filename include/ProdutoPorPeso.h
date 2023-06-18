@@ -13,7 +13,7 @@ public:
     string getPeso();
 
     //lembrar de verificar sua utilidade
-    void setPeso(double peso);
+    void setPeso(string);
     ~ProdutoPorPeso();
 };
 

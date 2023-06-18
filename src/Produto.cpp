@@ -25,19 +25,19 @@ string Produto::getPreco()
 
 
 //lembrar de verificar sua utilidade
-void Produto::setNome(std::string nome) 
+void Produto::setNome(std::string str) 
 {
-    this->nome = nome;
+    nome = str;
 }
 
-void Produto::setCodigo(int codigo) 
+void Produto::setCodigo(string str) 
 {
-    this->codigo = codigo;
+    codigo = str;
 }
 
-void Produto::setPreco(float preco) 
+void Produto::setPreco(string str) 
 {
-    this->preco = preco;
+    preco = str;
 }
 
 Produto::~Produto() {}
