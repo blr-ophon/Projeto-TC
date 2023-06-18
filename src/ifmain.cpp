@@ -17,12 +17,20 @@ void mainMenu(Estoque &estoque){
         cout << " 3 - Sair" << endl;
         cout << endl;
 
-        string option;
-        cin >> option;
+        string option_str;
+        cin >> option_str;
         cout << endl;
+
+        int option;
+        try {
+            option = stoi(option_str);
+        } catch (const std::invalid_argument& e) {
+            option = -1;
+        }
         
-        switch(stoi(option)){
+        switch(option){
             case 1:
+                //TODO
                 break;
             case 2:
                 estManageMenu(estoque);
@@ -47,11 +55,18 @@ void estManageMenu(Estoque &estoque){
         cout << " 5 - VOLTAR" << endl;
         cout << endl;
 
-        string option;
-        cin >> option;
+        string option_str;
+        cin >> option_str;
         cout << endl;
 
-        switch(stoi(option)){
+        int option;
+        try {
+            option = stoi(option_str);
+        } catch (const std::invalid_argument& e) {
+            option = -1;
+        }
+
+        switch(option){
             case 1:
                 estoque.imprimirEstoque();
                 break;
@@ -80,7 +95,14 @@ void searchProdutoMenu(Estoque &estoque){
     cout << " 2 - Produto por peso" << endl;
     cin >> escolhaTipoProduto;
 
-    switch(stoi(escolhaTipoProduto)){
+    int option;
+    try {
+        option = stoi(escolhaTipoProduto);
+    } catch (const std::invalid_argument& e) {
+        option = -1;
+    }
+
+    switch(option){
         case 1:
             {
             cout << "Nome do produto:"<< endl;
@@ -123,7 +145,14 @@ void insertProdutoMenu(Estoque &estoque){
     cout << " 2 - Produto por peso" << endl;
     cin >> escolhaTipoProduto;
 
-    switch(stoi(escolhaTipoProduto)){
+    int option;
+    try {
+        option = stoi(escolhaTipoProduto);
+    } catch (const std::invalid_argument& e) {
+        option = -1;
+    }
+
+    switch(option){
         case 1:
             {
             string nomeProduto;
@@ -185,7 +214,14 @@ void removeProdutoMenu(Estoque &estoque){
     cout << " 2 - Produto por peso" << endl;
     cin >> escolhaTipoProduto;
 
-    switch(stoi(escolhaTipoProduto)){
+    int option;
+    try {
+        option = stoi(escolhaTipoProduto);
+    } catch (const std::invalid_argument& e) {
+        option = -1;
+    }
+
+    switch(option){
         case 1:
             {
             cout << "Nome do produto:"<< endl;
