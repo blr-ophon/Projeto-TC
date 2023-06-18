@@ -3,11 +3,6 @@
 #include <iostream>
 #include <fstream>
 
-//TODO: usar enum para os 'estoques', com um ANY ao invés de all
-//TODO: testar os dois removerProduto
-//TODO: testar salvamento e recuperacao de dados em memoria externa.
-//TODO: Fix produtoporunidade constructor
-
 using namespace std;
 
 Estoque::Estoque() {
@@ -129,6 +124,35 @@ void Estoque::removerProdutoUnidade(string key) {
     }
 }
 
+ProdutoPorUnidade *Estoque::searchProdutoU(string key){
+    /*
+     * Busca produto (por unidade) da memoria usando nome
+     */
+    for(int i = 0; i < (int) produtosUnidade.size(); i++){  
+        string nome = produtosUnidade[i].getNome();
+        if(nome == key){
+            return &produtosUnidade[i];
+            break;
+        }
+    }
+
+    return NULL;
+}
+
+ProdutoPorPeso *Estoque::searchProdutoP(string key){
+    /*
+     * Busca produto (por unidade) da memoria usando nome
+     */
+    for(int i = 0; i < (int) produtosPeso.size(); i++){  
+        string nome = produtosPeso[i].getNome();
+        if(nome == key){
+            return &produtosPeso[i];
+            break;
+        }
+    }
+    return NULL;
+}
+
 void Estoque::removerProdutoPeso(string key) {
     /*
      * Remove produto (por Peso) da memoria.
@@ -162,33 +186,6 @@ void Estoque::imprimirEstoque(int estoque, bool all) {
     };
 }
 
-void Estoque::recuperarDadosDoProduto(int estoque, int produto, bool all) {
-    /*
-     * estoque indica se é por unidade ou por peso, all para qualquer um.
-     * Produto indica o id do produto pra encontrar?
-     * Estoque in-mem
-     */
-    bool imprimirPorUnidade = (estoque == 1) || (all && estoque != 2);
-    bool imprimirPorPeso = (estoque == 2) || all;
-
-    if (imprimirPorUnidade && produtosUnidade.size() > 0) {
-        cout << "Produtos por unidade: " << endl;
-        for (int i = 0; i < produtosUnidade.size(); i++) {
-            if (produto == i) {
-                cout << produtosUnidade[i].getNome() << " | Quantidade: " << produtosUnidade[i].getQuantidade() << endl;
-            }
-        }
-    }
-    else if (imprimirPorPeso && produtosPeso.size() > 0) {
-        cout << "Produtos por peso: " << endl;
-        for (int i = 0; i < produtosPeso.size(); i++) {
-            if (produto == i) {
-                cout << produtosPeso[i].getNome() << " | Quantidade: " << produtosPeso[i].getPeso() << endl;
-            }
-        }
-    }
-}
-
 int Estoque::getSize(int estoque) {
     /*
      * retorna a quantidade de items no estoque (in-mem)
@@ -203,19 +200,3 @@ int Estoque::getSize(int estoque) {
             return 0;
     }
 }
-
-ProdutoPorPeso Estoque::getpeso(int entrada) {
-    /*
-     * Pesquisa em memoria pelo peso de um produto. 
-     * Seria melhor com hashmap, mas o professor quer vetor ¯\_(ツ)_/¯
-     */
-    return produtosPeso[entrada];
-}
-ProdutoPorUnidade Estoque::getunidade(int entrada) {
-    /*
-     * Pesquisa em memoria pela unidade de um produto.
-     * Seria melhor com hashmap, mas o professor quer vetor ¯\_(ツ)_/¯
-     */
-    return produtosUnidade[entrada];
-}
-

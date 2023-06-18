@@ -56,7 +56,7 @@ void estManageMenu(Estoque &estoque){
                 estoque.imprimirEstoque();
                 break;
             case 2: // Search
-                SearchProdutoMenu(estoque);
+                searchProdutoMenu(estoque);
                 break;
             case 3: //Insert
                 insertProdutoMenu(estoque);
@@ -73,7 +73,7 @@ void estManageMenu(Estoque &estoque){
     }
 }
 
-void SearchProdutoMenu(Estoque &estoque){
+void searchProdutoMenu(Estoque &estoque){
     string escolhaTipoProduto;
     cout << "Escolha o tipo de produto: " << endl;
     cout << " 1 - Produto por unidade" << endl;
@@ -83,34 +83,31 @@ void SearchProdutoMenu(Estoque &estoque){
     switch(stoi(escolhaTipoProduto)){
         case 1:
             {
-            string indiceProdutoString;
-            cout << "Digite o índice do produto por unidade: ";
-            cin.ignore();
-            getline(cin, indiceProdutoString);
-            try {
-                int indiceProduto = stoi(indiceProdutoString);
-                estoque.recuperarDadosDoProduto(1, indiceProduto - 1, true);
-            }
-            catch (invalid_argument& e) {
-                cout << "\aERROR - ENTRADA INVALIDA - ERROR" << endl;
+            cout << "Nome do produto:"<< endl;
+            string nomeProduto;
+            cin >> nomeProduto;
+            ProdutoPorUnidade *produto = estoque.searchProdutoU(nomeProduto);
+            if(produto){
+                cout << "\nProduto:"<< endl;
+                cout << "> Nome: " << produto->getNome() << endl;
+                cout << "> Codigo: " << produto->getCodigo() << endl;
+                cout << "> Preço: " << produto->getPreco() << endl;
+                cout << "> Quantidade: " << produto->getQuantidade() << endl << endl;
             }
             break;
             }
-
-
         case 2:
             {
-            string indiceProdutoString;
-            cout << "Digite o índice do produto por peso: ";
-            cin.ignore();
-            getline(cin, indiceProdutoString);
-
-            try {
-                int indiceProduto = stoi(indiceProdutoString);
-                estoque.recuperarDadosDoProduto(2, indiceProduto - 1, true);
-            }
-            catch (invalid_argument& e) {
-                cout << "\aERROR - ENTRADA INVALIDA - ERROR" << endl;
+            cout << "Nome do produto:"<< endl;
+            string nomeProduto;
+            cin >> nomeProduto;
+            ProdutoPorPeso *produto = estoque.searchProdutoP(nomeProduto);
+            if(produto){
+                cout << "\nProduto:"<< endl;
+                cout << "> Nome: " << produto->getNome() << endl;
+                cout << "> Codigo: " << produto->getCodigo() << endl;
+                cout << "> Preço: " << produto->getPreco() << endl;
+                cout << "> Peso: " << produto->getPeso() << endl << endl;
             }
             break;
             }

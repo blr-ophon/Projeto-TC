@@ -1,6 +1,7 @@
-#include "Restaurante.h"
 
 /*
+#include "Restaurante.h"
+
 int main()
 {
     setlocale(LC_ALL, "Portuguese");

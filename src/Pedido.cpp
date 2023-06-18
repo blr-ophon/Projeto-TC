@@ -1,11 +1,11 @@
 #include "Pedido.h"
 
 void Pedido::adicionarProdutounidade(int codigo, Estoque estoque) {
-    this -> produtosUnidades.push_back (estoque.getunidade(codigo));
+    //this -> produtosUnidades.push_back (estoque.getunidade(codigo));
 }
 
 void Pedido::adicionarProdutopeso(int codigo, Estoque estoque) {
-     this -> produtosPesos.push_back (estoque.getpeso(codigo));
+     //this -> produtosPesos.push_back (estoque.getpeso(codigo));
 }
 
 void Pedido::removerProdutounidade(int entrada) {

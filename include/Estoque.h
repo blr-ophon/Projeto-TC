@@ -11,22 +11,21 @@ class Estoque {
         Estoque(); 
         ~Estoque(); 
                    
-        //Insert, delete, search
+        //Insert
         void adicionarProdutoPeso(ProdutoPorPeso);
         void adicionarProdutoUnidade(ProdutoPorUnidade);
+
+        //Remove
         void removerProdutoUnidade(string);
         void removerProdutoPeso(string);
-        ProdutoPorUnidade searchProdutoU(string);
-        ProdutoPorPeso searchProdutoP(string);
+
+        //Search
+        ProdutoPorUnidade *searchProdutoU(string);
+        ProdutoPorPeso *searchProdutoP(string);
 
         //Print
         void imprimirEstoque(int = 0, bool = true);
         int getSize(int);
-
-        //refazer:
-        ProdutoPorPeso getpeso(int);            
-        ProdutoPorUnidade getunidade(int);
-        void recuperarDadosDoProduto(int, int, bool);
 
     private:
         vector<ProdutoPorUnidade> produtosUnidade;
