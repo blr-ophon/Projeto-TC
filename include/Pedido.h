@@ -12,15 +12,23 @@ class Pedido{
 private:
     std::string nomeCliente;
     int codigoPedido;
-    std::vector<ProdutoPorUnidade> produtosUnidades;
-    std::vector<ProdutoPorPeso> produtosPesos;
     float valorTotal;
 
+    std::vector<ProdutoPorUnidade> produtosUnidades;
+    std::vector<ProdutoPorPeso> produtosPesos;
+
 public:
-    void adicionarProdutounidade(int, Estoque);
-    void adicionarProdutopeso(int, Estoque);
-    void removerProdutounidade(int);
-    void removerProdutopeso(int);
+    //print
+    void imprimirPedido(void);
+
+    //insert
+    void adicionarProdutounidade(ProdutoPorUnidade);
+    void adicionarProdutopeso(ProdutoPorPeso);
+
+    //delete
+    void removerProdutounidade(string);
+    void removerProdutopeso(string);
+
     void setNome(std::string nome);
     void setCodigo(int codigo);
     std::string getNome();

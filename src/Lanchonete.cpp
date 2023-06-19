@@ -2,6 +2,7 @@
 #include <iostream>
 
 Lanchonete::Lanchonete() {
+    this->estoque;
 }
 
 /*

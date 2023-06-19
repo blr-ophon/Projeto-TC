@@ -1,23 +1,47 @@
 #include "Pedido.h"
 
-void Pedido::adicionarProdutounidade(int codigo, Estoque estoque) {
-    //this -> produtosUnidades.push_back (estoque.getunidade(codigo));
+#include <iostream>
+
+void Pedido::imprimirPedido(void){
+    cout << "----PEDIDO----" << endl;
+    for(int i = 0; i < (int) produtosUnidades.size(); i++){
+        ProdutoPorUnidade produto = produtosUnidades[i];
+        cout << "> Nome: " << produto.getNome() << endl;
+        cout << "-- Codigo: " << produto.getCodigo() << endl;
+        cout << "-- Preço: " << produto.getPreco() << endl;
+        cout << "-- Quantidade: " << produto.getQuantidade() << endl << endl;
+    }
+    for(int i = 0; i < (int) produtosPesos.size(); i++){
+        ProdutoPorPeso produto = produtosPesos[i];
+        cout << "> Nome: " << produto.getNome() << endl;
+        cout << "-- Codigo: " << produto.getCodigo() << endl;
+        cout << "-- Preço: " << produto.getPreco() << endl;
+        cout << "-- Peso: " << produto.getPeso() << endl << endl;
+    }
 }
 
-void Pedido::adicionarProdutopeso(int codigo, Estoque estoque) {
-     //this -> produtosPesos.push_back (estoque.getpeso(codigo));
+void Pedido::adicionarProdutounidade(ProdutoPorUnidade produto) {
+    this -> produtosUnidades.push_back (produto);
 }
 
-void Pedido::removerProdutounidade(int entrada) {
-   vector<ProdutoPorUnidade>::iterator it;
-    it = produtosUnidades.begin() + entrada;
-    produtosUnidades.erase(it);
+void Pedido::adicionarProdutopeso(ProdutoPorPeso produto) {
+    this -> produtosPesos.push_back (produto);
 }
 
-void Pedido::removerProdutopeso(int entrada) {
-    vector<ProdutoPorPeso>::iterator it;
-    it = produtosPesos.begin() + entrada;
-    produtosPesos.erase(it);
+void Pedido::removerProdutounidade(string nome) {
+    for(int i = 0; i < (int) produtosUnidades.size(); i++){
+        if(produtosUnidades[i].getNome() == nome){
+            produtosUnidades.erase(produtosUnidades.begin() + i); 
+        }
+    }
+}
+
+void Pedido::removerProdutopeso(string nome) {
+    for(int i = 0; i < (int) produtosPesos.size(); i++){
+        if(produtosPesos[i].getNome() == nome){
+            produtosPesos.erase(produtosPesos.begin() + i); 
+        }
+    }
 }
 
 void Pedido::setNome(std::string nome) {

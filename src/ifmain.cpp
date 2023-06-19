@@ -3,14 +3,14 @@
 bool running = true;
 
 int main(int argc, char *argv[]){
-    Estoque estoque; 
+    Lanchonete lanchonete;
 
-    mainMenu(estoque);
+    mainMenu(lanchonete);
     
     return 0;
 }
 
-void mainMenu(Estoque &estoque){
+void mainMenu(Lanchonete &lanchonete){
     while(running){
         cout << " 1 - Atender Cliente" << endl;
         cout << " 2 - Gerenciar Estoque" << endl;
@@ -30,10 +30,10 @@ void mainMenu(Estoque &estoque){
         
         switch(option){
             case 1:
-                //TODO
+                pedidoManageMenu(lanchonete);
                 break;
             case 2:
-                estManageMenu(estoque);
+                estManageMenu(lanchonete.estoque);
                 break;
             case 3:
                 running = false;
@@ -41,6 +41,145 @@ void mainMenu(Estoque &estoque){
             default:
                 break;
         }
+    }
+}
+
+void pedidoManageMenu(Lanchonete &lanchonete){
+
+    Pedido pedido;
+
+    bool loop = true;
+    while(loop){
+        cout << "-------MENU DO ATENDIMENTO AO CLIENTE-------" << endl;
+        cout << " 1 - LISTAR PRODUTOS" << endl;
+        cout << " 2 - ADICIONAR AO CARRINHO" << endl;
+        cout << " 3 - REMOVER DO CARRINHO" << endl;
+        cout << " 4 - VER PEDIDO" << endl;
+        cout << " 5 - FINALIZAR PEDIDO" << endl;
+        cout << " 6 - VOLTAR" << endl << endl;
+
+        string option_str;
+        cin >> option_str;
+        cout << endl;
+
+        int option;
+        try {
+            option = stoi(option_str);
+        } catch (const std::invalid_argument& e) {
+            option = -1;
+        }
+
+        switch(option){
+            case 1: //Listar produtos
+                lanchonete.estoque.imprimirEstoque();
+                break;
+
+            case 2: //Adicionar ao carrinho
+                addCartMenu(lanchonete, pedido);
+                break;
+
+            case 3: //Remover do carrinho
+                delCartMenu(pedido);
+                break;
+
+            case 4: //Ver carrinho
+                pedido.imprimirPedido();
+                break;
+
+            case 5: //Finalizar pedido
+                break;
+
+            case 6:
+                loop = false;
+                break;
+
+            default:
+                break;
+        }
+    }
+}
+
+void addCartMenu(Lanchonete &lanchonete, Pedido &pedido){
+    string escolhaTipoProduto;
+    cout << "Escolha o tipo de produto: " << endl;
+    cout << " 1 - Produto por unidade" << endl;
+    cout << " 2 - Produto por peso" << endl;
+    cin >> escolhaTipoProduto;
+
+    int option;
+    try {
+        option = stoi(escolhaTipoProduto);
+    } catch (const std::invalid_argument& e) {
+        option = -1;
+    }
+
+    switch(option){
+        case 1:
+            {
+            cout << "Nome do produto:"<< endl;
+            string nomeProduto;
+            cin >> nomeProduto;
+
+            ProdutoPorUnidade *produto = lanchonete.estoque.searchProdutoU(nomeProduto);
+            if(produto){
+                pedido.adicionarProdutounidade(*produto);
+            }else{
+                cout << "Produto não encontrado."<< endl;
+            }
+            break;
+            }
+        case 2:
+            {
+            cout << "Nome do produto:"<< endl;
+            string nomeProduto;
+            cin >> nomeProduto;
+
+            ProdutoPorPeso *produto = lanchonete.estoque.searchProdutoP(nomeProduto);
+            if(produto){
+                pedido.adicionarProdutopeso(*produto);
+            }else{
+                cout << "Produto não encontrado."<< endl;
+            }
+            break;
+            }
+        default:
+            break;
+    }
+}
+
+void delCartMenu(Pedido &pedido){
+    string escolhaTipoProduto;
+    cout << "Escolha o tipo de produto: " << endl;
+    cout << " 1 - Produto por unidade" << endl;
+    cout << " 2 - Produto por peso" << endl;
+    cin >> escolhaTipoProduto;
+
+    int option;
+    try {
+        option = stoi(escolhaTipoProduto);
+    } catch (const std::invalid_argument& e) {
+        option = -1;
+    }
+
+    switch(option){
+        case 1:
+            {
+            cout << "Nome do produto:"<< endl;
+            string nomeProduto;
+            cin >> nomeProduto;
+            pedido.removerProdutounidade(nomeProduto);
+            break;
+            }
+        case 2:
+            {
+            cout << "Nome do produto:"<< endl;
+            string nomeProduto;
+            cin >> nomeProduto;
+            pedido.removerProdutopeso(nomeProduto);
+            break;
+            }
+        default:
+            break;
     }
 }
 

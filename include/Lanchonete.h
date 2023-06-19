@@ -14,14 +14,17 @@ private:
         std::string rua;
         int numero;
     };
+
     std::string nomeLoja;
     Endereco endereco;
     int telefone;
-    Estoque estoque;
     double lucros;
+
     std::vector<Pedido> historicoPedidos;
 
 public:
+    Estoque estoque;
+
     Lanchonete();
     void realizarPedido(Pedido*);
     void removerPedido(int);
