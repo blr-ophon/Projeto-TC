@@ -18,14 +18,14 @@ using namespace std;
 void mainMenu(Lanchonete &lanchonete);
 
 //gerenciamento de estoque
-void estManageMenu(Estoque &estoque);
-void insertProdutoMenu(Estoque &estoque);
-void searchProdutoMenu(Estoque &estoque);
-void removeProdutoMenu(Estoque &estoque);
+void Menu_estoque(Estoque &estoque);
+void Menu_estoqueAdd(Estoque &estoque);
+void Menu_estoqueSearch(Estoque &estoque);
+void Menu_estoqueDel(Estoque &estoque);
 
 //atendimento ao cliente
-void pedidoManageMenu(Lanchonete &lanchonete);
-void addCartMenu(Lanchonete &lanchonete, Pedido &pedido);
-void delCartMenu(Pedido &pedido);
+void Menu_atendimento(Lanchonete &lanchonete);
+void Menu_atendimentoAdd(Lanchonete &lanchonete, Pedido &pedido);
+void Menu_atendimentoDel(Pedido &pedido);
 
 #endif

@@ -198,6 +198,8 @@ void Estoque::imprimirEstoque(int estoque, bool all) {
             cout << produtosPeso[i].getNome() << " | Quantidade: " << produtosPeso[i].getPeso() << endl;
         };
     };
+
+    cout << endl;
 }
 
 int Estoque::getSize(int estoque) {

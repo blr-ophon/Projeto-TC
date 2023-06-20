@@ -75,6 +75,8 @@ void Pedido::imprimirPedido(void){
         cout << "-- Preço: " << produto.getPreco() << endl;
         cout << "-- Peso: " << produto.getPeso() << endl << endl;
     }
+
+    cout << endl;
 }
 
 void Pedido::adicionarProdutounidade(ProdutoPorUnidade produto) {
