@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -97,6 +98,17 @@ Estoque::~Estoque() {
     }
 }
 
+
+static bool comparaPorNome(Produto& a, Produto& b) {
+    return a.getNome() < b.getNome();
+}
+
+void Estoque::sortEstoque(void){
+    sort(produtosUnidade.begin(), produtosUnidade.end(), comparaPorNome);
+    sort(produtosPeso.begin(), produtosPeso.end(), comparaPorNome);
+}
+
+
 void Estoque::adicionarProdutoPeso(ProdutoPorPeso ProdutoP) {
     /*
      * Adiciona novo produto (por peso) na memoria 
@@ -171,6 +183,8 @@ void Estoque::imprimirEstoque(int estoque, bool all) {
     /*
      * 'estoque' indica se é por unidade ou por peso, all para qualquer um
      */
+    sortEstoque();
+
     if (estoque == 1 || all) {
         cout << "Produtos por unidade: " << endl;
         for (int i = 0; i < produtosUnidade.size(); i++) {

@@ -11,6 +11,9 @@ class Estoque {
         Estoque(); 
         ~Estoque(); 
 
+        //ordenar por nome
+        void sortEstoque(void);
+
         //Insert
         void adicionarProdutoPeso(ProdutoPorPeso);
         void adicionarProdutoUnidade(ProdutoPorUnidade);
