@@ -10,11 +10,10 @@ private:
 
 public:
     ProdutoPorPeso(string, string, string, string);
-    string getPeso();
-
-    //lembrar de verificar sua utilidade
-    void setPeso(string);
     ~ProdutoPorPeso();
+
+    string getPeso();
+    void setPeso(string);
 };
 
 #endif

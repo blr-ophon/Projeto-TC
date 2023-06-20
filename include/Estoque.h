@@ -27,7 +27,7 @@ class Estoque {
         ProdutoPorPeso *searchProdutoP(string);
 
         //Print
-        void imprimirEstoque(int = 0, bool = true);
+        void imprimirEstoque(void);
         int getSize(int);
 
     private:

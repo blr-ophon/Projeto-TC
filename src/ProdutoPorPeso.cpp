@@ -6,6 +6,9 @@ ProdutoPorPeso::ProdutoPorPeso(string peso, string nome, string codigo, string p
     this->peso = peso;
 }
 
+ProdutoPorPeso::~ProdutoPorPeso(void){
+}
+
 string ProdutoPorPeso::getPeso()  
 {
     return peso;
@@ -16,5 +19,3 @@ void ProdutoPorPeso::setPeso(string str)
 {
     peso = str;
 }
-
-ProdutoPorPeso::~ProdutoPorPeso() {}

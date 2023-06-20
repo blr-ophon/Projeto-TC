@@ -3,12 +3,15 @@
 #include <iostream>
 #include <cstdio>
 
-
 void Pedido::realizarPedido(Estoque *estoque){
     /*
-     * Verifica se ha produtos disponiveis. Realiza a compra e atualiza o estoque
+     * Para cada produto no pedido: Verifica se ha em estoque na quantidade pedida e,
+     * se estiver, atualiza o estoque subtraindo-o.
      */
+    float valorTotal = 0;
+
     for(int i = 0; i < (int) produtosUnidades.size(); i++){
+        
         ProdutoPorUnidade produtoPedido = produtosUnidades[i];
         ProdutoPorUnidade *produtoEstoque = estoque->searchProdutoU(produtoPedido.getNome());
          
@@ -16,7 +19,7 @@ void Pedido::realizarPedido(Estoque *estoque){
             unsigned int total = stoi(produtoEstoque->getQuantidade());
             unsigned int desejado = stoi(produtoPedido.getQuantidade());
 
-            if(total - desejado < 0){
+            if(total < desejado){
                 cout << "Parte da venda nao processada. Produto em falta:" << endl;
                 cout << "> Nome: " << produtoPedido.getNome() << endl;
                 cout << "> Quantidade desejada: " << desejado << endl;
@@ -28,10 +31,12 @@ void Pedido::realizarPedido(Estoque *estoque){
                 sprintf(buf, "%d", total - desejado);
                 string newAmount_str(buf);
                 produtoEstoque->setQuantidade(newAmount_str);
+                valorTotal += stof(produtoPedido.getPreco());
             }
         }
     }
     for(int i = 0; i < (int) produtosPesos.size(); i++){
+        
         ProdutoPorPeso produtoPedido = produtosPesos[i];
         ProdutoPorPeso *produtoEstoque = estoque->searchProdutoP(produtoPedido.getNome());
          
@@ -39,7 +44,7 @@ void Pedido::realizarPedido(Estoque *estoque){
             float total = stoi(produtoEstoque->getPeso());
             float desejado = stoi(produtoPedido.getPeso());
 
-            if(total - desejado < 0){
+            if(total - desejado < 0 || desejado < 0){
                 cout << "Parte da venda nao processada. Produto em falta:" << endl;
                 cout << "> Nome: " << produtoPedido.getNome() << endl;
                 cout << "> Quantidade desejada: " << desejado << endl;
@@ -51,12 +56,15 @@ void Pedido::realizarPedido(Estoque *estoque){
                 sprintf(buf, "%f", total - desejado);
                 string newAmount_str(buf);
                 produtoEstoque->setPeso(newAmount_str);
+                valorTotal += stof(produtoPedido.getPreco());
             }
         }
     }
 
     produtosUnidades.clear();
     produtosPesos.clear();
+
+    cout << endl << "> Valor total: " << valorTotal << endl;
 }
 
 void Pedido::imprimirPedido(void){
@@ -102,32 +110,3 @@ void Pedido::removerProdutopeso(string nome) {
         }
     }
 }
-
-void Pedido::setNome(std::string nome) {
-    this -> nomeCliente = nome;
-}
-
-void Pedido::setCodigo(int codigo) {
-    this -> codigoPedido = codigo;
-}
-
-std::string Pedido::getNome(){
-    return nomeCliente;
-}
-
-int Pedido::getCodigo(){
-    return codigoPedido;
-}
-
-float Pedido::getValorTotal(){
-    float total = 0;
-    for(int i = 0; i < produtosUnidades.size(); i++){
-        total += stof(produtosUnidades[i].getPreco());
-    };
-    for(int i = 0; i < produtosPesos.size(); i++){
-        total += stof(produtosPesos[i].getPreco());
-    };
-    this->valorTotal = total;
-    return valorTotal;
-}
-

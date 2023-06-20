@@ -13,6 +13,7 @@ Estoque::Estoque() {
     ifstream arquivoUnidade("BancoUnidades.txt");
     if (arquivoUnidade.is_open())
     {
+        //Le linhas uma a uma e insere no respectivo atributo por ordem
         string curLine; 
         ProdutoPorUnidade tmp("", "", "", "");  
         for(int i = 0; getline(arquivoUnidade, curLine); i++){
@@ -41,6 +42,7 @@ Estoque::Estoque() {
     ifstream arquivoPeso("BancoPeso.txt");
     if (arquivoPeso.is_open())
     {
+        //Le linhas uma a uma e insere no respectivo atributo por ordem
         string curLine; 
         ProdutoPorPeso tmp("", "", "", "");  
         for(int i = 0; getline(arquivoPeso, curLine); i++){
@@ -100,10 +102,16 @@ Estoque::~Estoque() {
 
 
 static bool comparaPorNome(Produto& a, Produto& b) {
+    /*
+     * Para uso em sorting
+     */
     return a.getNome() < b.getNome();
 }
 
 void Estoque::sortEstoque(void){
+    /*
+     * Ordena por nome em ordem crescente
+     */
     sort(produtosUnidade.begin(), produtosUnidade.end(), comparaPorNome);
     sort(produtosPeso.begin(), produtosPeso.end(), comparaPorNome);
 }
@@ -179,30 +187,26 @@ void Estoque::removerProdutoPeso(string key) {
 }
 
 
-void Estoque::imprimirEstoque(int estoque, bool all) {
+void Estoque::imprimirEstoque(void) {
     /*
-     * 'estoque' indica se é por unidade ou por peso, all para qualquer um
+     * Imprime todos os produtos em estoque
      */
-    sortEstoque();
+    sortEstoque();  //ordena em ordem alfabetica
 
-    if (estoque == 1 || all) {
-        cout << "Produtos por unidade: " << endl;
-        for (int i = 0; i < produtosUnidade.size(); i++) {
-            cout << produtosUnidade[i].getNome() << " | Quantidade: " << produtosUnidade[i].getQuantidade() << endl;
-        };
+    cout << "Produtos por unidade: " << endl;
+    for (int i = 0; i < (int) produtosUnidade.size(); i++) {
+        cout << produtosUnidade[i].getNome() << " | Quantidade: " << produtosUnidade[i].getQuantidade() << endl;
     };
-    if (all) { cout << "------------------------" << endl; };
-    if (estoque == 2 || all) {
-        cout << "Produtos por peso: " << endl;
-        for (int i = 0; i < produtosPeso.size(); i++) {
-            cout << produtosPeso[i].getNome() << " | Quantidade: " << produtosPeso[i].getPeso() << endl;
-        };
+
+    cout << "Produtos por peso: " << endl;
+    for (int i = 0; i < (int) produtosPeso.size(); i++) {
+        cout << produtosPeso[i].getNome() << " | Quantidade: " << produtosPeso[i].getPeso() << endl;
     };
 
     cout << endl;
 }
 
-int Estoque::getSize(int estoque) {
+int Estoque::getSize(int estoque){
     /*
      * retorna a quantidade de items no estoque (in-mem)
      */

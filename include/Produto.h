@@ -17,6 +17,7 @@ protected:
     //string regraTransporte;
 public:
     Produto(string, string, string);
+    ~Produto();
     string getNome();
     string getCodigo();
     string getPreco();
@@ -25,8 +26,6 @@ public:
     void setNome(string);
     void setCodigo(string);
     void setPreco(string);
-
-    ~Produto();
 };
 
 #endif

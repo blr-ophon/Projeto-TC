@@ -8,21 +8,8 @@
 #include "ProdutoPorPeso.h"
 #include "Estoque.h"
 
-typedef struct{
-    string nome;
-    union amount{
-        float peso;
-        int quantidade;
-    };
-}PedidoEntry;
-
-
 class Pedido{
     private:
-        std::string nomeCliente;
-        int codigoPedido;
-        float valorTotal;
-
         std::vector<ProdutoPorUnidade> produtosUnidades;
         std::vector<ProdutoPorPeso> produtosPesos;
 
@@ -39,12 +26,6 @@ class Pedido{
         //delete
         void removerProdutounidade(string);
         void removerProdutopeso(string);
-
-        void setNome(std::string nome);
-        void setCodigo(int codigo);
-        std::string getNome();
-        int getCodigo();
-        float getValorTotal();
 };
 
 #endif

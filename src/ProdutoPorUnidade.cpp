@@ -6,6 +6,9 @@ ProdutoPorUnidade::ProdutoPorUnidade(string quantidade, string nome, string codi
     this->quantidade = quantidade;
 }
 
+ProdutoPorUnidade::~ProdutoPorUnidade(void){
+}
+
 string ProdutoPorUnidade::getQuantidade()  
 {
     return quantidade;
@@ -16,7 +19,4 @@ void ProdutoPorUnidade::setQuantidade(string str)
 {
     quantidade = str;
 }
-
-ProdutoPorUnidade::~ProdutoPorUnidade() {}
-
 
