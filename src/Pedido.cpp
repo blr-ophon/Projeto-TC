@@ -1,6 +1,63 @@
 #include "Pedido.h"
 
 #include <iostream>
+#include <cstdio>
+
+
+void Pedido::realizarPedido(Estoque *estoque){
+    /*
+     * Verifica se ha produtos disponiveis. Realiza a compra e atualiza o estoque
+     */
+    for(int i = 0; i < (int) produtosUnidades.size(); i++){
+        ProdutoPorUnidade produtoPedido = produtosUnidades[i];
+        ProdutoPorUnidade *produtoEstoque = estoque->searchProdutoU(produtoPedido.getNome());
+         
+        if(produtoEstoque){
+            unsigned int total = stoi(produtoEstoque->getQuantidade());
+            unsigned int desejado = stoi(produtoPedido.getQuantidade());
+
+            if(total - desejado < 0){
+                cout << "Parte da venda nao processada. Produto em falta:" << endl;
+                cout << "> Nome: " << produtoPedido.getNome() << endl;
+                cout << "> Quantidade desejada: " << desejado << endl;
+                cout << "> Quantidade em estoque: " << total << endl << endl;
+
+            }else{
+                //Realiza compra e Atualiza Estoque
+                char buf[50];
+                sprintf(buf, "%d", total - desejado);
+                string newAmount_str(buf);
+                produtoEstoque->setQuantidade(newAmount_str);
+            }
+        }
+    }
+    for(int i = 0; i < (int) produtosPesos.size(); i++){
+        ProdutoPorPeso produtoPedido = produtosPesos[i];
+        ProdutoPorPeso *produtoEstoque = estoque->searchProdutoP(produtoPedido.getNome());
+         
+        if(produtoEstoque){
+            float total = stoi(produtoEstoque->getPeso());
+            float desejado = stoi(produtoPedido.getPeso());
+
+            if(total - desejado < 0){
+                cout << "Parte da venda nao processada. Produto em falta:" << endl;
+                cout << "> Nome: " << produtoPedido.getNome() << endl;
+                cout << "> Quantidade desejada: " << desejado << endl;
+                cout << "> Quantidade em estoque: " << total << endl << endl;
+
+            }else{
+                //Realiza compra e Atualiza Estoque
+                char buf[50];
+                sprintf(buf, "%f", total - desejado);
+                string newAmount_str(buf);
+                produtoEstoque->setPeso(newAmount_str);
+            }
+        }
+    }
+
+    produtosUnidades.clear();
+    produtosPesos.clear();
+}
 
 void Pedido::imprimirPedido(void){
     cout << "----PEDIDO----" << endl;

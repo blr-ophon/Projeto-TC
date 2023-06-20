@@ -10,7 +10,7 @@ class Estoque {
     public:
         Estoque(); 
         ~Estoque(); 
-                   
+
         //Insert
         void adicionarProdutoPeso(ProdutoPorPeso);
         void adicionarProdutoUnidade(ProdutoPorUnidade);

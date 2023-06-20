@@ -8,32 +8,43 @@
 #include "ProdutoPorPeso.h"
 #include "Estoque.h"
 
+typedef struct{
+    string nome;
+    union amount{
+        float peso;
+        int quantidade;
+    };
+}PedidoEntry;
+
+
 class Pedido{
-private:
-    std::string nomeCliente;
-    int codigoPedido;
-    float valorTotal;
+    private:
+        std::string nomeCliente;
+        int codigoPedido;
+        float valorTotal;
 
-    std::vector<ProdutoPorUnidade> produtosUnidades;
-    std::vector<ProdutoPorPeso> produtosPesos;
+        std::vector<ProdutoPorUnidade> produtosUnidades;
+        std::vector<ProdutoPorPeso> produtosPesos;
 
-public:
-    //print
-    void imprimirPedido(void);
+    public:
+        void realizarPedido(Estoque*);
+        
+        //print
+        void imprimirPedido(void);
 
-    //insert
-    void adicionarProdutounidade(ProdutoPorUnidade);
-    void adicionarProdutopeso(ProdutoPorPeso);
+        //insert
+        void adicionarProdutounidade(ProdutoPorUnidade);
+        void adicionarProdutopeso(ProdutoPorPeso);
 
-    //delete
-    void removerProdutounidade(string);
-    void removerProdutopeso(string);
+        //delete
+        void removerProdutounidade(string);
+        void removerProdutopeso(string);
 
-    void setNome(std::string nome);
-    void setCodigo(int codigo);
-    std::string getNome();
-    int getCodigo();
-    float getValorTotal();
+        void setNome(std::string nome);
+        void setCodigo(int codigo);
+        std::string getNome();
+        int getCodigo();
+        float getValorTotal();
 };
 
 #endif

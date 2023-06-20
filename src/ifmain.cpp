@@ -87,6 +87,7 @@ void pedidoManageMenu(Lanchonete &lanchonete){
                 break;
 
             case 5: //Finalizar pedido
+                pedido.realizarPedido(&lanchonete.estoque);
                 break;
 
             case 6:
@@ -100,50 +101,29 @@ void pedidoManageMenu(Lanchonete &lanchonete){
 }
 
 void addCartMenu(Lanchonete &lanchonete, Pedido &pedido){
-    string escolhaTipoProduto;
-    cout << "Escolha o tipo de produto: " << endl;
-    cout << " 1 - Produto por unidade" << endl;
-    cout << " 2 - Produto por peso" << endl;
-    cin >> escolhaTipoProduto;
+    cout << "Nome do produto:"<< endl;
+    string nomeProduto;
+    cin >> nomeProduto;
 
-    int option;
-    try {
-        option = stoi(escolhaTipoProduto);
-    } catch (const std::invalid_argument& e) {
-        option = -1;
-    }
+    cout << "Quantidade (unidade ou kg)"<< endl;
+    string amount;
+    cin >> amount;
 
-    switch(option){
-        case 1:
-            {
-            cout << "Nome do produto:"<< endl;
-            string nomeProduto;
-            cin >> nomeProduto;
+    ProdutoPorUnidade *produtoU = lanchonete.estoque.searchProdutoU(nomeProduto);
+    ProdutoPorPeso *produtoP = lanchonete.estoque.searchProdutoP(nomeProduto);
 
-            ProdutoPorUnidade *produto = lanchonete.estoque.searchProdutoU(nomeProduto);
-            if(produto){
-                pedido.adicionarProdutounidade(*produto);
-            }else{
-                cout << "Produto não encontrado."<< endl;
-            }
-            break;
-            }
-        case 2:
-            {
-            cout << "Nome do produto:"<< endl;
-            string nomeProduto;
-            cin >> nomeProduto;
+    if(produtoU){
+        ProdutoPorUnidade tmp_produtoU = *produtoU;
+        tmp_produtoU.setQuantidade(amount);
+        pedido.adicionarProdutounidade(tmp_produtoU);
 
-            ProdutoPorPeso *produto = lanchonete.estoque.searchProdutoP(nomeProduto);
-            if(produto){
-                pedido.adicionarProdutopeso(*produto);
-            }else{
-                cout << "Produto não encontrado."<< endl;
-            }
-            break;
-            }
-        default:
-            break;
+    }else if(produtoP){
+        ProdutoPorPeso tmp_produtoP = *produtoP;
+        tmp_produtoP.setPeso(amount);
+        pedido.adicionarProdutopeso(tmp_produtoP);
+
+    }else{
+        cout << "Produto não encontrado."<< endl << endl;
     }
 }
 
@@ -182,6 +162,8 @@ void delCartMenu(Pedido &pedido){
             break;
     }
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 void estManageMenu(Estoque &estoque){
     bool loop = true;
