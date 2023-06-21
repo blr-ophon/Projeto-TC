@@ -1,43 +1,68 @@
 #include "Lanchonete.h"
+
 #include <iostream>
+#include <fstream>
 
-Lanchonete::Lanchonete() {
-    this->estoque;
-}
+void Lanchonete::abrirDBs(void){
+    /*
+     * Abre os bancos e carrega dados em memoria
+     */
+    ifstream arquivoUnidade("DB_porUnidade.txt");
+    if (arquivoUnidade.is_open())
+    {
+        //Le linhas uma a uma e insere no respectivo atributo por ordem
+        string curLine; 
+        ProdutoPorUnidade tmp("", "", "", "");  
+        for(int i = 0; getline(arquivoUnidade, curLine); i++){
+            switch(i % 4){
+                case 0:
+                    tmp.setNome(curLine);
+                    break;
+                case 1:
+                    tmp.setCodigo(curLine);
+                    break;
+                case 2:
+                    tmp.setPreco(curLine);
+                    break;
+                case 3:
+                    tmp.setQuantidade(curLine);
+                    //produtosUnidade.push_back(tmp);
+                    estoque.adicionarProdutoUnidade(tmp);
+                    break;
+                default:
+                    break;
+            }
+        }
+        arquivoUnidade.close();
+    }
 
-void Lanchonete::setNomeLanchonete(string nome) {
-    this->nomeLoja = nome;
-}
 
-std::string Lanchonete::getNome() {
-    return nomeLoja;
-}
-
-void Lanchonete::setEndereco(string cidade, string bairro, string rua, int numero) {
-    this->endereco.cidade = cidade;
-    this->endereco.bairro = bairro;
-    this->endereco.rua = rua;
-    this->endereco.numero = numero;
-}
-
-void Lanchonete::imprimeEndereco() {
-    cout<<"Cidade: "<<endereco.cidade<<endl;
-    cout<<"Bairro: "<<endereco.bairro<<endl;
-    cout<<"Rua: "<<endereco.rua<<endl;
-    cout<<"Numero: "<<endereco.numero<<endl;
-}
-
-double Lanchonete::getLucro() {
-    return lucros;
-}
-
-void Lanchonete::setTelefone(int telefone) {
-    this->telefone = telefone;
-}
-
-int Lanchonete::getTelefone() {
-    return telefone;
-}
-
-Lanchonete::~Lanchonete() {
+    ifstream arquivoPeso("DB_porPeso.txt");
+    if (arquivoPeso.is_open())
+    {
+        //Le linhas uma a uma e insere no respectivo atributo por ordem
+        string curLine; 
+        ProdutoPorPeso tmp("", "", "", "");  
+        for(int i = 0; getline(arquivoPeso, curLine); i++){
+            switch(i % 4){
+                case 0:
+                    tmp.setNome(curLine);
+                    break;
+                case 1:
+                    tmp.setCodigo(curLine);
+                    break;
+                case 2:
+                    tmp.setPreco(curLine);
+                    break;
+                case 3:
+                    tmp.setPeso(curLine);
+                    //produtosPeso.push_back(tmp);
+                    estoque.adicionarProdutoPeso(tmp);
+                    break;
+                default:
+                    break;
+            }
+        }
+        arquivoUnidade.close();
+    }
 }

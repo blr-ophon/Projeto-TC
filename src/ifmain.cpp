@@ -4,6 +4,7 @@ bool running = true;
 
 int main(int argc, char *argv[]){
     Lanchonete lanchonete;
+    lanchonete.abrirDBs();
 
     mainMenu(lanchonete);
     

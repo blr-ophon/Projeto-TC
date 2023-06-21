@@ -7,65 +7,6 @@
 using namespace std;
 
 Estoque::Estoque() {
-    /*
-     * Abre os bancos e carrega em memoria
-     */
-    ifstream arquivoUnidade("BancoUnidades.txt");
-    if (arquivoUnidade.is_open())
-    {
-        //Le linhas uma a uma e insere no respectivo atributo por ordem
-        string curLine; 
-        ProdutoPorUnidade tmp("", "", "", "");  
-        for(int i = 0; getline(arquivoUnidade, curLine); i++){
-            switch(i % 4){
-                case 0:
-                    tmp.setNome(curLine);
-                    break;
-                case 1:
-                    tmp.setCodigo(curLine);
-                    break;
-                case 2:
-                    tmp.setPreco(curLine);
-                    break;
-                case 3:
-                    tmp.setQuantidade(curLine);
-                    produtosUnidade.push_back(tmp);
-                    break;
-                default:
-                    break;
-            }
-        }
-        arquivoUnidade.close();
-    }
-
-
-    ifstream arquivoPeso("BancoPeso.txt");
-    if (arquivoPeso.is_open())
-    {
-        //Le linhas uma a uma e insere no respectivo atributo por ordem
-        string curLine; 
-        ProdutoPorPeso tmp("", "", "", "");  
-        for(int i = 0; getline(arquivoPeso, curLine); i++){
-            switch(i % 4){
-                case 0:
-                    tmp.setNome(curLine);
-                    break;
-                case 1:
-                    tmp.setCodigo(curLine);
-                    break;
-                case 2:
-                    tmp.setPreco(curLine);
-                    break;
-                case 3:
-                    tmp.setPeso(curLine);
-                    produtosPeso.push_back(tmp);
-                    break;
-                default:
-                    break;
-            }
-        }
-        arquivoUnidade.close();
-    }
 }
 
 
@@ -193,14 +134,24 @@ void Estoque::imprimirEstoque(void) {
      */
     sortEstoque();  //ordena em ordem alfabetica
 
-    cout << "Produtos por unidade: " << endl;
+    cout << "Produtos por unidade: " << endl << endl;
     for (int i = 0; i < (int) produtosUnidade.size(); i++) {
-        cout << produtosUnidade[i].getNome() << " | Quantidade: " << produtosUnidade[i].getQuantidade() << endl;
+        ProdutoPorUnidade produto = produtosUnidade[i];
+
+        cout << "> Nome: " << produto.getNome() << endl;
+        cout << "-- Codigo: " << produto.getCodigo() << endl;
+        cout << "-- Preço: " << produto.getPreco() << endl;
+        cout << "-- Quantidade: " << produto.getQuantidade() << endl << endl;
     };
 
-    cout << "Produtos por peso: " << endl;
+    cout << "Produtos por peso: " << endl << endl;
     for (int i = 0; i < (int) produtosPeso.size(); i++) {
-        cout << produtosPeso[i].getNome() << " | Quantidade: " << produtosPeso[i].getPeso() << endl;
+        ProdutoPorPeso produto = produtosPeso[i];
+
+        cout << "> Nome: " << produto.getNome() << endl;
+        cout << "-- Codigo: " << produto.getCodigo() << endl;
+        cout << "-- Preço: " << produto.getPreco() << endl;
+        cout << "-- Quantidade: " << produto.getPeso() << " kg" << endl << endl;
     };
 
     cout << endl;
