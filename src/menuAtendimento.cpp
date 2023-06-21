@@ -6,7 +6,7 @@ void Menu_atendimento(Lanchonete &lanchonete){
 
     bool loop = true;
     while(loop){
-        cout << "-------MENU DE ATENDIMENTO AO CLIENTE-------" << endl;
+        cout << "\n-------MENU DE ATENDIMENTO AO CLIENTE-------" << endl;
         cout << " 1 - Listar produtos em estoque" << endl;
         cout << " 2 - Adicionar produto ao pedido" << endl;
         cout << " 3 - Remover produto do pedido" << endl;

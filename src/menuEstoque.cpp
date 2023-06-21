@@ -3,7 +3,7 @@
 void Menu_estoque(Estoque &estoque){
     bool loop = true;
     while(loop){
-        cout << "------MENU DO GERENCIAMENTO DE ESTOQUE------" << endl;
+        cout << "\n------MENU DO GERENCIAMENTO DE ESTOQUE------" << endl;
         cout << " 1 - Ver estoque" << endl;
         cout << " 2 - Procurar produto" << endl;
         cout << " 3 - Adicionar produto" << endl;
