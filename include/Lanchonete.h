@@ -18,23 +18,22 @@ private:
     std::string nomeLoja;
     Endereco endereco;
     int telefone;
-    double lucros;
+    double lucros = 0;
 
     std::vector<Pedido> historicoPedidos;
 
 public:
-    Estoque estoque;
-
     Lanchonete();
-    void realizarPedido(Pedido*);
-    void removerPedido(int);
+
+    Estoque estoque;
     void setNomeLanchonete(std::string);
-    std::string getNome();
+    void setTelefone(int);
     void setEndereco(std::string, std::string, std::string, int);
     void imprimeEndereco();
-    double getLucro();
-    void setTelefone(int);
+
+    std::string getNome();
     int getTelefone();
+    double getLucro();
     ~Lanchonete();
 };
 

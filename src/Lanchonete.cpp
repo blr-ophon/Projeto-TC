@@ -5,18 +5,6 @@ Lanchonete::Lanchonete() {
     this->estoque;
 }
 
-/*
-void Lanchonete::realizarPedido(Pedido *ponteiro) {
-    this->historicoPedidos.push_back(ponteiro);
-}
-*/
-
-void Lanchonete::removerPedido(int entrada) {
-     vector<Pedido>::iterator it;
-    it = historicoPedidos.begin() + entrada - 1;
-    historicoPedidos.erase(it);
-}
-
 void Lanchonete::setNomeLanchonete(string nome) {
     this->nomeLoja = nome;
 }
