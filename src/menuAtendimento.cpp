@@ -65,6 +65,12 @@ void Menu_atendimentoAdd(Lanchonete &lanchonete, Pedido &pedido){
     cout << "Quantidade (unidade ou kg)"<< endl;
     string amount;
     cin >> amount;
+    try {
+        stof(amount);
+    } catch (const std::invalid_argument& e) {
+        cout << "Valor invalido" << endl;
+        return;
+    }
 
     ProdutoPorUnidade *produtoU = lanchonete.estoque.searchProdutoU(nomeProduto);
     ProdutoPorPeso *produtoP = lanchonete.estoque.searchProdutoP(nomeProduto);

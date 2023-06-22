@@ -112,6 +112,8 @@ void Menu_estoqueAdd(Estoque &estoque){
     switch(option){
         case 1:
             {
+            int validate;
+
             string nomeProduto;
             string codigoProduto;
             string precoProduto;
@@ -126,9 +128,21 @@ void Menu_estoqueAdd(Estoque &estoque){
 
             cout << "Digite o preço do produto: ";
             cin >> precoProduto;
+            try {
+                validate = stof(precoProduto);
+            } catch (const std::invalid_argument& e) {
+                cout << "Valor invalido" << endl;
+                break;
+            }
 
             cout << "Digite a quantidade do produto: ";
             cin >> quantidade;
+            try {
+                validate = stoi(quantidade);
+            } catch (const std::invalid_argument& e) {
+                cout << "Valor invalido" << endl;
+                break;
+            }
 
             estoque.adicionarProdutoUnidade(ProdutoPorUnidade(quantidade, nomeProduto, codigoProduto, precoProduto));
             cout << "Produto por unidade adicionado com sucesso ao estoque." << endl;
@@ -137,6 +151,7 @@ void Menu_estoqueAdd(Estoque &estoque){
 
         case 2:
             {
+            int validate;
             string nomeProduto;
             string peso;
             string codigo;
@@ -148,12 +163,26 @@ void Menu_estoqueAdd(Estoque &estoque){
 
             cout << "Digite o peso do produto: ";
             cin >> peso;
+            try {
+                validate = stof(peso);
+            } catch (const std::invalid_argument& e) {
+                cout << "Valor invalido" << endl;
+                option = -1;
+                break;
+            }
 
             cout << "Digite o codigo do produto: ";
             cin >> codigo;
 
             cout << "Digite o preco do produto: ";
             cin >> preco;
+            try {
+                validate = stof(preco);
+            } catch (const std::invalid_argument& e) {
+                cout << "Valor invalido" << endl;
+                option = -1;
+                break;
+            }
 
             estoque.adicionarProdutoPeso(ProdutoPorPeso(peso, nomeProduto, codigo, preco));
             cout << "Produto por peso adicionado com sucesso ao estoque." << endl;
